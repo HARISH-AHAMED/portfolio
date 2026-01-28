@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     title: 'Recipe Share App',
     description: 'A modern recipe sharing application frontend featuring glassmorphism design and interactive UI elements.',
     techStack: ['React', 'Tailwind', 'Glassmorphism'],
-    imageUrl: '/images/recipe-app.png',
+    imageUrl: 'images/recipe-app.png',
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -45,7 +45,7 @@ export const PROJECTS: Project[] = [
     title: 'Dribbble Clone',
     description: 'A high-fidelity landing page clone of Dribbble focused on pixel-perfect layout and responsive CSS.',
     techStack: ['HTML', 'CSS', 'Responsive Design'],
-    imageUrl: '/images/dribbble-clone.png',
+    imageUrl: 'images/dribbble-clone.png',
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     title: 'Quiz Application',
     description: 'A dynamic quiz engine with instant feedback, multiple categories, and responsive design.',
     techStack: ['React', 'Tailwind', 'Local Storage'],
-    imageUrl: '/images/quiz-app.png',
+    imageUrl: 'images/quiz-app.png',
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -63,7 +63,7 @@ export const PROJECTS: Project[] = [
     title: 'LifeLedger - Expense Tracker',
     description: 'Full-featured finance dashboard with data visualization for tracking daily expenditures.',
     techStack: ['React', 'Firebase', 'Chart.js'],
-    imageUrl: '/images/life-ledger.png',
+    imageUrl: 'images/life-ledger.png',
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
     title: 'Movie Search App',
     description: 'Global cinema database integration using external APIs with asynchronous search functionality.',
     techStack: ['JavaScript', 'API', 'Bootstrap'],
-    imageUrl: '/images/movie-app.png',
+    imageUrl: 'images/movie-app.png',
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -81,7 +81,7 @@ export const PROJECTS: Project[] = [
     title: 'Portfolio Website',
     description: 'This current professional showcase featuring advanced CSS and React modular components.',
     techStack: ['React', 'Lucide Icons', 'Tailwind'],
-    imageUrl: '/images/portfolio-v2.png',
+    imageUrl: 'images/portfolio-v2.png',
     liveUrl: '#',
     githubUrl: '#'
   }

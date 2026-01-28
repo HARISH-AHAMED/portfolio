@@ -18,7 +18,7 @@ const About: React.FC = () => {
                 </div>
 
                 <img
-                  src="/images/profile.jpg"
+                  src="images/profile.jpg"
                   alt="Harish Ahamed"
                   className="relative rounded-[1.8rem] w-full aspect-square object-cover object-top shadow-inner border border-white/5"
                 />
