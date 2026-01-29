@@ -37,8 +37,8 @@ export const PROJECTS: Project[] = [
     description: 'A modern recipe sharing application frontend featuring glassmorphism design and interactive UI elements.',
     techStack: ['React', 'Tailwind', 'Glassmorphism'],
     imageUrl: 'images/recipe-app.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://harish-ahamed.github.io/recipie-share-app/',
+    githubUrl: 'https://github.com/HARISH-AHAMED/recipie-share-app'
   },
   {
     id: 'dribbble-clone',
@@ -46,8 +46,8 @@ export const PROJECTS: Project[] = [
     description: 'A high-fidelity landing page clone of Dribbble focused on pixel-perfect layout and responsive CSS.',
     techStack: ['HTML', 'CSS', 'Responsive Design'],
     imageUrl: 'images/dribbble-clone.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://harish-ahamed.github.io/dribbble-clone-frontend/',
+    githubUrl: 'https://github.com/HARISH-AHAMED/dribbble-clone-frontend'
   },
   {
     id: 'quiz-app',
@@ -55,8 +55,8 @@ export const PROJECTS: Project[] = [
     description: 'A dynamic quiz engine with instant feedback, multiple categories, and responsive design.',
     techStack: ['React', 'Tailwind', 'Local Storage'],
     imageUrl: 'images/quiz-app.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://github.com/HARISH-AHAMED/exam-application',
+    githubUrl: 'https://github.com/HARISH-AHAMED/exam-application'
   },
   {
     id: 'lifeledger',
@@ -64,8 +64,8 @@ export const PROJECTS: Project[] = [
     description: 'Full-featured finance dashboard with data visualization for tracking daily expenditures.',
     techStack: ['React', 'Firebase', 'Chart.js'],
     imageUrl: 'images/life-ledger.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://github.com/HARISH-AHAMED/life-ledger',
+    githubUrl: 'https://github.com/HARISH-AHAMED/life-ledger'
   },
   {
     id: 'movie-search',
@@ -73,8 +73,8 @@ export const PROJECTS: Project[] = [
     description: 'Global cinema database integration using external APIs with asynchronous search functionality.',
     techStack: ['JavaScript', 'API', 'Bootstrap'],
     imageUrl: 'images/movie-app.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://harish-ahamed.github.io/movie-search-app/',
+    githubUrl: 'https://github.com/HARISH-AHAMED/movie-search-app'
   },
   {
     id: 'portfolio-v2',
@@ -82,8 +82,8 @@ export const PROJECTS: Project[] = [
     description: 'This current professional showcase featuring advanced CSS and React modular components.',
     techStack: ['React', 'Lucide Icons', 'Tailwind'],
     imageUrl: 'images/portfolio-v2.png',
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://github.com/HARISH-AHAMED/portfolio',
+    githubUrl: 'https://github.com/HARISH-AHAMED/portfolio'
   }
 ];
 

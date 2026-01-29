@@ -5,14 +5,30 @@ import { Menu, X } from 'lucide-react';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const scrollContainer = document.getElementById('scroll-container');
     const handleScroll = () => {
+      // Handle scrolled state for glass effect
       if (scrollContainer) {
         setScrolled(scrollContainer.scrollTop > 50);
       } else {
         setScrolled(window.scrollY > 50);
+      }
+
+      // Handle active section detection
+      const sections = ['home', 'about', 'services', 'projects', 'skills', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section is roughly in the top half of the viewport
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
       }
     };
 
@@ -42,20 +58,26 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'glass py-3' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#home" className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-          HA.
+          HA<span className="animate-blink text-indigo-500">.</span>
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 items-center">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-medium transition-all duration-300 ${isActive
+                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent transform scale-105'
+                  : 'text-slate-300 hover:text-white'
+                  }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
           <a
             href="#contact"
             className="relative p-[1px] inline-flex items-center justify-center overflow-hidden rounded-full group"
@@ -76,16 +98,22 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 p-6 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-200">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-lg font-medium text-slate-300 hover:text-white"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`text-lg font-medium transition-all duration-300 ${isActive
+                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent'
+                  : 'text-slate-300 hover:text-white'
+                  }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </a>
+            );
+          })}
           <a
             href="#contact"
             className="relative p-[1px] inline-flex items-center justify-center overflow-hidden rounded-full group"
@@ -98,6 +126,17 @@ const Navbar: React.FC = () => {
           </a>
         </div>
       )}
+      {/* Gradient Bottom Border */}
+      <div
+        className={`absolute bottom-0 left-0 w-full overflow-hidden transition-all duration-700 ease-in-out ${scrolled ? 'h-[1px] opacity-100' : 'h-0 opacity-0'
+          }`}
+      >
+        {/* Mild Gradient Border */}
+        <div className="w-full h-full bg-gradient-to-r from-transparent via-indigo-500/20 via-purple-500/20 to-transparent" />
+
+        {/* Subtle Glow/Glass Effect */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-[1px]" />
+      </div>
     </nav>
   );
 };

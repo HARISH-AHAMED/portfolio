@@ -34,9 +34,12 @@ const CustomCursor: React.FC = () => {
         // Hover detection for interactive elements
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
+            const textTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'li', 'b', 'strong', 'i', 'em'];
+
             if (
                 target.tagName.toLowerCase() === 'a' ||
                 target.tagName.toLowerCase() === 'button' ||
+                textTags.includes(target.tagName.toLowerCase()) ||
                 target.closest('a') ||
                 target.closest('button') ||
                 target.classList.contains('clickable') ||
@@ -106,22 +109,22 @@ const CustomCursor: React.FC = () => {
             {/* Inner Dot */}
             <div
                 ref={dotRef}
-                className={`fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                className={`fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 ${isVisible && !isHovering ? 'opacity-100' : 'opacity-0'}`}
                 style={{ marginLeft: '-3px', marginTop: '-3px' }}
             />
 
-            {/* Outer Circle */}
+            {/* Outer Circle (Sharp Glassy Lens) */}
             <div
                 ref={outlineRef}
-                className={`fixed top-0 left-0 rounded-full pointer-events-none z-[9998] border border-indigo-500/50 transition-all duration-300 ease-out flex items-center justify-center ${isVisible ? 'opacity-100' : 'opacity-0'
-                    } ${isHovering ? 'w-12 h-12 bg-indigo-500/10 border-indigo-400 scale-125' : 'w-8 h-8'
-                    } ${isClicked ? 'scale-75 brightness-150' : ''
-                    }`}
+                className={`fixed top-0 left-0 rounded-full pointer-events-none z-[9998] transition-all duration-500 ease-out flex items-center justify-center ${isVisible ? 'opacity-100' : 'opacity-0'
+                    } ${isHovering
+                        ? 'w-20 h-20 bg-white/5 scale-150 border border-white/40 shadow-[0_0_25px_rgba(255,255,255,0.2)]'
+                        : 'w-8 h-8 bg-transparent border border-indigo-500/50'
+                    } ${isClicked ? 'scale-75 brightness-150' : ''}`}
                 style={{
-                    marginLeft: isHovering ? '-24px' : '-16px',
-                    marginTop: isHovering ? '-24px' : '-16px',
-                    boxShadow: isHovering ? '0 0 20px rgba(99, 102, 241, 0.3)' : 'none',
-                    backdropFilter: 'blur(2px)'
+                    marginLeft: isHovering ? '-40px' : '-16px',
+                    marginTop: isHovering ? '-40px' : '-16px',
+                    backdropFilter: isHovering ? 'brightness(1.5) contrast(1.2) saturate(1.2)' : 'none',
                 }}
             />
         </>

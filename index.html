@@ -17,7 +17,6 @@
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     @keyframes float {
@@ -103,8 +102,38 @@
     }
 
     .animate-gradient-wave {
-      background-size: 200% 200%;
-      animation: gradient-wave 3s ease infinite;
+      background: linear-gradient(270deg,
+          rgba(99, 102, 241, 0.5),
+          rgba(168, 85, 247, 0.5),
+          rgba(236, 72, 153, 0.5),
+          rgba(99, 102, 241, 0.5));
+      background-size: 400% 400%;
+      animation: gradient-wave 8s ease infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .animate-blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    .social-icon-gradient {
+      stroke: url(#social-gradient);
+      transition: stroke 0.3s ease;
+    }
+
+    .group:hover .social-icon-gradient {
+      stroke: white !important;
     }
   </style>
   <script type="importmap">
@@ -121,6 +150,20 @@
 </head>
 
 <body class="bg-slate-950 text-slate-100">
+  <svg width="0" height="0" class="absolute">
+    <defs>
+      <linearGradient id="social-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6366f1">
+          <animate attributeName="stop-color" values="#6366f1; #a855f7; #ec4899; #6366f1" dur="8s"
+            repeatCount="indefinite" />
+        </stop>
+        <stop offset="100%" stop-color="#ec4899">
+          <animate attributeName="stop-color" values="#ec4899; #6366f1; #a855f7; #ec4899" dur="8s"
+            repeatCount="indefinite" />
+        </stop>
+      </linearGradient>
+    </defs>
+  </svg>
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

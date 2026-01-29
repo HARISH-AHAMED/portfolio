@@ -76,7 +76,9 @@ const Projects: React.FC = () => {
 
         <div className="mt-16 text-center">
           <a
-            href="#"
+            href="https://github.com/HARISH-AHAMED"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors border-b border-slate-700 pb-1"
           >
             View all projects on GitHub
