@@ -1,20 +1,46 @@
-
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, CheckCircle2, AlertCircle, X } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<{
+    show: boolean;
+    message: string;
+    type: 'success' | 'error';
+  } | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
-      alert('Thank you! Your message has been sent (simulation).');
-      setFormState({ name: '', email: '', message: '' });
-      setIsSubmitting(false);
-    }, 1500);
+
+    // Configuration from the EmailJS dashboard
+    const SERVICE_ID = 'service_w1oef9z';
+    const TEMPLATE_ID = 'template_d3u1edd';
+    const PUBLIC_KEY = 'cVTj8FGGfnSS1jWQA';
+
+    if (formRef.current) {
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+        .then(() => {
+          setNotification({
+            show: true,
+            message: 'Message sent successfully! I will get back to you soon.',
+            type: 'success'
+          });
+          setFormState({ name: '', email: '', message: '' });
+          setIsSubmitting(false);
+        }, (error) => {
+          console.error('EmailJS Error:', error);
+          setNotification({
+            show: true,
+            message: 'Failed to send message. Please try again or contact me directly.',
+            type: 'error'
+          });
+          setIsSubmitting(false);
+        });
+    }
   };
 
   return (
@@ -93,34 +119,37 @@ const Contact: React.FC = () => {
             {/* Background pattern */}
             <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-600/10 blur-[100px] rounded-full"></div>
 
-            <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="relative z-10 space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-2">Name</label>
                   <input
                     type="text"
+                    name="name"
                     required
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
-                    placeholder="John Doe"
+                    placeholder="your name"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
                   <input
                     type="email"
+                    name="email"
                     required
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
-                    placeholder="harishahamedk17@gmail.com"
+                    placeholder="your mail"
                   />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">Message</label>
                 <textarea
+                  name="message"
                   required
                   rows={5}
                   value={formState.message}
@@ -141,6 +170,44 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Notification Popup */}
+      {notification?.show && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/20 backdrop-blur-sm transition-all duration-300">
+          <div className="relative max-w-sm w-full glass rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300 transform scale-100">
+            {/* Gradient Wave Background for Popup - Subtle highlight */}
+            <div className="absolute inset-0 opacity-10 animate-gradient-wave"></div>
+
+            <div className="relative z-10 p-8 text-center">
+              <button
+                onClick={() => setNotification(null)}
+                className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className={`w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center ${notification.type === 'success' ? 'bg-indigo-500/10 text-indigo-400' : 'bg-red-500/10 text-red-400'
+                }`}>
+                {notification.type === 'success' ? <CheckCircle2 className="w-8 h-8" /> : <AlertCircle className="w-8 h-8" />}
+              </div>
+
+              <h4 className="text-xl font-bold mb-2 text-white">
+                {notification.type === 'success' ? 'Message Sent!' : 'Delivery Failed'}
+              </h4>
+              <p className="text-slate-400 mb-8 leading-relaxed">
+                {notification.message}
+              </p>
+
+              <button
+                onClick={() => setNotification(null)}
+                className="w-full py-4 rounded-xl font-bold bg-slate-800/50 hover:bg-slate-800 text-white border border-slate-700 transition-all hover:border-indigo-500/50 active:scale-95"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
